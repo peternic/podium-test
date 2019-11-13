@@ -13,10 +13,6 @@ const podlet = new Podlet({
     development: process.env.NODE_ENV !== 'production',
 });
 
-podlet.defaults({
-    locale: 'nb-NO',
-});
-
 app.use(podlet.middleware());
 
 app.get(podlet.content(), (req, res) => {
