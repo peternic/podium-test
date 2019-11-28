@@ -4,7 +4,7 @@ const Podlet = require('@podium/podlet');
 const app = express();
 
 const podlet = new Podlet({
-    name: 'myCatsPodlet',
+    name: 'myDogsPodlet',
     version: '1.0.0',
     pathname: '/',
     fallback: '/fallback',
@@ -16,24 +16,24 @@ const podlet = new Podlet({
 app.use(podlet.middleware());
 
 app.get(podlet.content(), (req, res) => {
-    console.log(res.locals.podium);
+    console.log(res.locals.podium.context);
     const { mountOrigin, mountPathname, publicPathname } = res.locals.podium.context;
     const url = new URL(publicPathname, mountOrigin);
     console.log(url.href);
     res.status(200).podiumSend(`
         <div
-            id="cats"
+            id="dogs"
             data-mount-origin="${mountOrigin}"
             data-mount-pathname="${mountPathname}"
             data-public-pathname="${publicPathname}"
         >
-            <div id="cats-content"/>
+            <div id="dogs-content"/>
         </div>
         <script>
-            fetch('${url.href + '/api/cats'}')
+            fetch('${url.href + '/api/dogs'}')
                 .then((response) => response.text())
                 .then(content => {
-                    const el = document.getElementById('cats-content');
+                    const el = document.getElementById('dogs-content');
                     el.innerHTML = content;
                 });
         </script>
@@ -46,16 +46,16 @@ app.get(podlet.manifest(), (req, res) => {
 });
 
 app.get(podlet.fallback(), (req, res) => {
-    res.status(200).podiumSend('<div>Sad kitten :(</div>');
+    res.status(200).podiumSend('<div>Sad doggy :(</div>');
 });
 
 podlet.proxy({ target: '/api', name: 'api' });
 
-app.get('/api/cats', (req, res) => {
+app.get('/api/dogs', (req, res) => {
     res.json([
-        { name: 'fluffy' },
-        { name: 'stuffy' },
+        { name: 'snoopy' },
+        { name: 'roopy' },
     ]);
 });
 
-app.listen(7100);
+app.listen(7200);

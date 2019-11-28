@@ -1,5 +1,8 @@
 const express = require('express');
 const Podlet = require('@podium/podlet');
+const React = require('react');
+const App = require('./src/App');
+const renderToString = require('react-dom/server');
 
 const app = express();
 
@@ -20,23 +23,17 @@ app.get(podlet.content(), (req, res) => {
     const { mountOrigin, mountPathname, publicPathname } = res.locals.podium.context;
     const url = new URL(publicPathname, mountOrigin);
     console.log(url.href);
+
+    const appString = renderToString(<App/>);
+
     res.status(200).podiumSend(`
         <div
-            id="cats"
             data-mount-origin="${mountOrigin}"
             data-mount-pathname="${mountPathname}"
             data-public-pathname="${publicPathname}"
         >
-            <div id="cats-content"/>
+            ${appString}
         </div>
-        <script>
-            fetch('${url.href + '/api/cats'}')
-                .then((response) => response.text())
-                .then(content => {
-                    const el = document.getElementById('cats-content');
-                    el.innerHTML = content;
-                });
-        </script>
     `);
 
 });
@@ -58,4 +55,4 @@ app.get('/api/cats', (req, res) => {
     ]);
 });
 
-app.listen(7100);
+app.listen(7400);
