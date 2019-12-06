@@ -1,0 +1,20 @@
+version: '3'
+services:
+  layout:
+    build: .
+    container_name: layout
+    ports:
+      - 7000:7000
+    depends_on:
+      - "header"
+      - "cats"
+  header:
+    image: podlets/header-nextjs
+    container_name: header
+    ports:
+      - 8000:8000
+  cats:
+    image: podlets/cats-html
+    container_name: cats
+    ports:
+      - 7100:7100

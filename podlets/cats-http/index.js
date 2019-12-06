@@ -16,10 +16,8 @@ const podlet = new Podlet({
 app.use(podlet.middleware());
 
 app.get(podlet.content(), (req, res) => {
-    console.log(res.locals.podium);
     const { mountOrigin, mountPathname, publicPathname } = res.locals.podium.context;
     const url = new URL(publicPathname, mountOrigin);
-    console.log(url.href);
     res.status(200).podiumSend(`
         <div
             id="cats"
@@ -58,4 +56,4 @@ app.get('/api/cats', (req, res) => {
     ]);
 });
 
-app.listen(7100);
+app.listen(process.env.PORT || 7100);

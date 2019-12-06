@@ -1,0 +1,29 @@
+{
+  "name": "podlet-nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon -w server/index.js server/index.js",
+    "build": "next build",
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "@gje/icons": "^9.8.11",
+    "@gje/typography": "^9.8.11",
+    "@podium/podlet": "^4.2.4",
+    "express": "^4.17.1",
+    "next": "9.1.4",
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
+  },
+  "devDependencies": {
+    "@types/next": "^9.0.0",
+    "@types/node": "^12.12.14",
+    "@types/react": "^16.9.15",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^2.0.1",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3"
+  }
+}

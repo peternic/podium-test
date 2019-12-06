@@ -1,0 +1,16 @@
+{
+  "name": "basic-podlet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@podium/podlet": "^4.2.2",
+    "express": "^4.17.1"
+  }
+}
